@@ -1,0 +1,26 @@
+{
+  "name": "php_homework",
+  "displayName": "php大作业",
+  "version": "1.0.0",
+  "description": "登录注册系统",
+  "author": "星",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "latest",
+    "@nuxtjs/proxy": "latest",
+    "bootstrap": "latest",
+    "bootstrap-vue": "latest",
+    "cross-env": "latest",
+    "nuxt": "latest",
+    "vee-validate": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  }
+}
