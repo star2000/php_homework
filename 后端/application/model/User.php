@@ -11,7 +11,7 @@ class User extends Model
      * @param string $name
      * @return bool
      */
-    public function check_name($name)
+    public static function check_name($name)
     {
         return (bool) self::where('name', $name)->find();
     }
@@ -22,7 +22,7 @@ class User extends Model
      * @param string $pwd
      * @return bool
      */
-    public function sign_up($name, $pwd)
+    public static function sign_up($name, $pwd)
     {
         return (bool) self::insert([
             'name' => $name,
@@ -36,7 +36,7 @@ class User extends Model
      * @param string $pwd
      * @return bool
      */
-    public function sign_in($name, $pwd)
+    public static function sign_in($name, $pwd)
     {
         return (bool) self::where([
             'name' => $name,
