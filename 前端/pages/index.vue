@@ -1,8 +1,6 @@
 <template>
   <b-container>
-    <b-card header="登录/注册" header-class="text-center display-4">
-      <login-form />
-    </b-card>
+    <login-form />
   </b-container>
 </template>
 <script>

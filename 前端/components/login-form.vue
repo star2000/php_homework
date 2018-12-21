@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-card header="登录/注册" header-class="text-center display-4">
     <b-input
       size="lg"
       name="名字"
@@ -26,7 +26,7 @@
     <b-btn v-if="注册状态===undefined" @click="$router.back()" size="lg" block>返回</b-btn>
     <b-btn v-if="注册状态===false" @click="注册()" variant="success" size="lg" block>注册</b-btn>
     <b-btn v-if="注册状态===true" @click="登录()" variant="primary" size="lg" block>登录</b-btn>
-  </b-container>
+  </b-card>
 </template>
 <script>
 export default {
