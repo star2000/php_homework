@@ -11,7 +11,7 @@ class User extends Model
      * @param string $name
      * @return bool
      */
-    public static function check_name($name)
+    public static function is_sign($name)
     {
         return (bool) self::where('name', $name)->find();
     }
