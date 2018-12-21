@@ -8,3 +8,7 @@ create table user(
     name varchar(20) unique not null,
     pwd char(40) not null
 );
+
+-- 创建数据库管理员
+-- create user 'xing'@'localhost' identified by 'xing';
+-- grant all on php_homework.* to 'xing'@'localhost';

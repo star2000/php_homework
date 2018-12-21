@@ -17,9 +17,9 @@ return [
     // 数据库名
     'database'        => 'php_homework',
     // 用户名
-    'username'        => 'root',
+    'username'        => 'xing',
     // 密码
-    'password'        => 'root',
+    'password'        => 'xing',
     // 端口
     'hostport'        => '',
     // 连接dsn

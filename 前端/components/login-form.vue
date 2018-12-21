@@ -22,16 +22,25 @@
     />
     <span class="text-danger">{{errors.first('密码')}}</span>
     <br>
-    <b-btn size="lg" block>登录</b-btn>
+    <b-btn v-if="是否注册" size="lg" block>登录</b-btn>
   </b-form>
 </template>
 <script>
 export default {
+  data: () => ({
+    名字: "",
+    密码: "",
+    是否注册: true
+  }),
   watch: {
     名字(名) {
-      this.$axios.post("user/check_name", { name: 名 }).then(({ data }) => {
-        this.是否注册 = data.msg;
-      })
+      this.$axios
+        .post("user/check_name", {
+          name: 名
+        })
+        .then(({ data }) => {
+          this.是否注册 = data.msg;
+        });
     }
   }
 };
