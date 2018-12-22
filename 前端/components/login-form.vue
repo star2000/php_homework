@@ -5,10 +5,10 @@
       name="名字"
       title="不得超过二十个字"
       placeholder="名字"
-      @change="是否注册()"
       v-validate="'required|max:20'"
       v-model="名字"
       v-b-tooltip.focus
+      @change="验证()||是否注册()"
     />
     <span class="text-danger">{{errors.first('名字')}}</span>
     <br>
@@ -23,9 +23,9 @@
     />
     <span class="text-danger">{{errors.first('密码')}}</span>
     <br>
-    <b-btn v-if="注册状态===undefined" @click="$router.back()" size="lg" block>返回</b-btn>
-    <b-btn v-if="注册状态===false" @click="注册()" variant="success" size="lg" block>注册</b-btn>
-    <b-btn v-if="注册状态===true" @click="登录()" variant="primary" size="lg" block>登录</b-btn>
+    <b-btn v-if="注册状态===true" @click="验证()||登录()" variant="primary" size="lg" block>登录</b-btn>
+    <b-btn v-else-if="注册状态===false" @click="验证()||注册()" variant="success" size="lg" block>注册</b-btn>
+    <b-btn v-else @click="$router.back()" size="lg" block>返回</b-btn>
   </b-card>
 </template>
 <script>
@@ -64,6 +64,14 @@ export default {
         .then(({ data }) => {
           alert(data.msg ? "登录成功" : "登录成功");
         });
+    },
+    验证() {
+      if (this.errors.any()) {
+        this.注册状态 = undefined;
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 };

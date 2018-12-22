@@ -1,8 +1,8 @@
 <?php
 namespace app\controller;
 
-use think\Controller;
 use app\model\User as UserModel;
+use think\Controller;
 
 class User extends Controller
 {
@@ -13,9 +13,18 @@ class User extends Controller
      * @param string $pwd
      * @return bool
      */
-    public function sign_in($name,$pwd)
+    public function sign_in($name, $pwd)
     {
-        return ['msg'=>UserModel::sign_in($name,sha1($pwd))];
+        $result = $this->validate([
+            'name' => $name,
+            'pwd' => $pwd,
+        ], 'app\validate\User');
+        if ($result === true) {
+            $msg = UserModel::sign_in($name, sha1($pwd));
+        } else {
+            $msg = $result;
+        }
+        return ['msg' => $msg];
     }
     /**
      * 注册
@@ -24,9 +33,18 @@ class User extends Controller
      * @param string $pwd
      * @return bool
      */
-    public function sign_up($name,$pwd)
+    public function sign_up($name, $pwd)
     {
-        return ['msg'=>UserModel::sign_up($name,sha1($pwd))];
+        $result = $this->validate([
+            'name' => $name,
+            'pwd' => $pwd,
+        ], 'app\validate\User');
+        if ($result === true) {
+            $msg = UserModel::sign_up($name, sha1($pwd));
+        } else {
+            $msg = $result;
+        }
+        return ['msg' => $msg];
     }
     /**
      * 检查用户名是否注册
@@ -36,6 +54,14 @@ class User extends Controller
      */
     public function is_sign($name)
     {
-        return ['msg'=>UserModel::is_sign($name)];
+        $result = $this->validate([
+            'name' => $name,
+        ], 'app\validate\User.name');
+        if ($result === true) {
+            $msg = UserModel::is_sign($name);
+        } else {
+            $msg = $result;
+        }
+        return ['msg' => $msg];
     }
 }

@@ -1,7 +1,7 @@
 import pkg from './package'
 
-module.exports = {
-  mode: 'spa',
+export default {
+  // mode: 'spa',
 
   head: {
     title: pkg.displayName,
@@ -44,6 +44,7 @@ module.exports = {
     'bootstrap-vue/nuxt',
     ['@nuxtjs/proxy', { pathRewrite: { '^/api': '/' } }]
   ],
+
   /*
   ** Axios模块配置
   */
@@ -51,6 +52,7 @@ module.exports = {
     // 文档: https://axios.nuxtjs.org/options
     baseURL: '/api'
   },
+
   /*
   ** 代理配置
   */
