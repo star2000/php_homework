@@ -78,7 +78,7 @@ class User extends Controller
      *
      * @return void
      */
-    public function loginOut()
+    public function logout()
     {
         Session::clear();
     }
