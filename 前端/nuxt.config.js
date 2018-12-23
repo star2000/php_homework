@@ -3,6 +3,10 @@ import pkg from './package'
 export default {
   mode: 'spa',
 
+  router: {
+    middleware: 'check-login'
+  },
+  
   head: {
     title: pkg.displayName,
     meta: [
