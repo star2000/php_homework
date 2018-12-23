@@ -29,6 +29,7 @@ export default {
   ** 全局样式表
   */
   css: [
+    'assets/main.css'
   ],
 
   /*
