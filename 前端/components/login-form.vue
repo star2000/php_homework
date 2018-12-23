@@ -8,7 +8,7 @@
       v-validate="'required|max:20'"
       v-model="名字"
       v-b-tooltip.focus
-      @change="是否注册()"
+      @change="验证()||是否注册()"
     />
     <span class="text-danger">{{errors.first('名字')}}</span>
     <br>
@@ -37,9 +37,6 @@ export default {
   }),
   methods: {
     是否注册() {
-      if (this.errors.any()) {
-        this.注册状态 = undefined;
-      }
       this.$axios
         .post("user/isSign", {
           name: this.名字
@@ -64,7 +61,6 @@ export default {
     },
     验证() {
       if (this.errors.any()) {
-        alert("请填写合规的内容");
         this.注册状态 = undefined;
         return true;
       } else {

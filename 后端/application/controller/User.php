@@ -8,31 +8,6 @@ use think\facade\Session;
 class User extends Controller
 {
     /**
-     * 登录
-     *
-     * @param string $name
-     * @param string $pwd
-     * @return think\response\Json
-     */
-    public function signIn($name, $pwd)
-    {
-        $r = $this->validate([
-            'name' => $name,
-            'pwd' => $pwd,
-        ], 'app\validate\User');
-        if (true !== $r) {
-            $this->error($r);
-        }
-        if (true !== $this->isSign($name)) {
-            $this->error('用户未注册');
-        }
-        if (true !== UserModel::signIn($name, sha1($pwd))) {
-            $this->error('密码错误');
-        }
-        Session::set('name', $name);
-        $this->success('登录成功');
-    }
-    /**
      * 注册
      *
      * @param string $name
@@ -70,6 +45,31 @@ class User extends Controller
             $this->error($r);
         }
         return UserModel::isSign($name);
+    }
+    /**
+     * 登录
+     *
+     * @param string $name
+     * @param string $pwd
+     * @return think\response\Json
+     */
+    public function signIn($name, $pwd)
+    {
+        $r = $this->validate([
+            'name' => $name,
+            'pwd' => $pwd,
+        ], 'app\validate\User');
+        if (true !== $r) {
+            $this->error($r);
+        }
+        if (true !== $this->isSign($name)) {
+            $this->error('用户未注册');
+        }
+        if (true !== UserModel::signIn($name, sha1($pwd))) {
+            $this->error('密码错误');
+        }
+        Session::set('name', $name);
+        $this->success('登录成功');
     }
     /**
      * 是否已登录
