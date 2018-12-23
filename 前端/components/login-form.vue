@@ -38,31 +38,31 @@ export default {
   methods: {
     是否注册() {
       this.$axios
-        .post("user/is_sign", {
+        .post("user/isSign", {
           name: this.名字
         })
         .then(({ data }) => {
-          this.注册状态 = data.msg;
+          this.注册状态 = data;
         });
     },
     注册() {
       this.$axios
-        .post("user/sign_up", {
+        .post("user/signUp", {
           name: this.名字,
           pwd: this.密码
         })
         .then(({ data }) => {
-          alert(data.msg ? "注册成功" : "注册失败");
+          alert(data ? "注册成功" : "注册失败");
         });
     },
     登录() {
       this.$axios
-        .post("user/sign_in", {
+        .post("user/signIn", {
           name: this.名字,
           pwd: this.密码
         })
         .then(({ data }) => {
-          alert(data.msg ? "登录成功" : "登录成功");
+          alert(data ? "登录成功" : "登录失败");
         });
     },
     验证() {

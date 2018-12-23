@@ -1,14 +1,12 @@
 <template>
   <b-container>
-    <login-form />
+    {{用户}}
   </b-container>
 </template>
 <script>
-import loginForm from "~/components/login-form.vue";
-
 export default {
-  components: {
-    loginForm
+  asyncData({ $axios }) {
+    return $axios.post("user/isLogin").then(({ data }) => ({ 用户: data }));
   }
 };
 </script>

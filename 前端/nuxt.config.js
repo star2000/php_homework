@@ -1,7 +1,7 @@
 import pkg from './package'
 
 export default {
-  // mode: 'spa',
+  mode: 'spa',
 
   head: {
     title: pkg.displayName,
