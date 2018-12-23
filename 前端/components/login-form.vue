@@ -8,7 +8,7 @@
       v-validate="'required|max:20'"
       v-model="名字"
       v-b-tooltip.focus
-      @change="验证()||是否注册()"
+      @change="是否注册()"
     />
     <span class="text-danger">{{errors.first('名字')}}</span>
     <br>
@@ -37,6 +37,9 @@ export default {
   }),
   methods: {
     是否注册() {
+      if (this.errors.any()) {
+        this.注册状态 = undefined;
+      }
       this.$axios
         .post("user/isSign", {
           name: this.名字
@@ -46,27 +49,22 @@ export default {
         });
     },
     注册() {
-      this.$axios
-        .post("user/signUp", {
-          name: this.名字,
-          pwd: this.密码
-        })
-        .then(({ data }) => {
-          alert(data ? "注册成功" : "注册失败");
-        });
+      this.$store.dispatch("注册", {
+        名字: this.名字,
+        密码: this.密码
+      });
+      this.$router.push("/");
     },
     登录() {
-      this.$axios
-        .post("user/signIn", {
-          name: this.名字,
-          pwd: this.密码
-        })
-        .then(({ data }) => {
-          alert(data ? "登录成功" : "登录失败");
-        });
+      this.$store.dispatch("登录", {
+        名字: this.名字,
+        密码: this.密码
+      });
+      this.$router.push("/");
     },
     验证() {
       if (this.errors.any()) {
+        alert("请填写合规的内容");
         this.注册状态 = undefined;
         return true;
       } else {

@@ -16,16 +16,21 @@ class User extends Controller
      */
     public function signIn($name, $pwd)
     {
-        $result = $this->validate([
+        $r = $this->validate([
             'name' => $name,
             'pwd' => $pwd,
         ], 'app\validate\User');
-        if ($result === true) {
-            Session::set('name', $name);
-            return UserModel::signIn($name, sha1($pwd));
-        } else {
-            return $result;
+        if (true !== $r) {
+            $this->error($r);
         }
+        if (true !== $this->isSign($name)) {
+            $this->error('用户未注册');
+        }
+        if (true !== UserModel::signIn($name, sha1($pwd))) {
+            $this->error('密码错误');
+        }
+        Session::set('name', $name);
+        $this->success('登录成功');
     }
     /**
      * 注册
@@ -36,38 +41,40 @@ class User extends Controller
      */
     public function signUp($name, $pwd)
     {
-        $result = $this->validate([
+        $r = $this->validate([
             'name' => $name,
             'pwd' => $pwd,
         ], 'app\validate\User');
-        if ($result === true) {
-            Session::set('name', $name);
-            return UserModel::signUp($name, sha1($pwd));
-        } else {
-            return $result;
+        if (true !== $r) {
+            $this->error($r);
         }
+        if (true === $this->isSign($name)) {
+            $this->error('用户已注册');
+        }
+        UserModel::signUp($name, sha1($pwd));
+        Session::set('name', $name);
+        $this->success('注册成功');
     }
     /**
-     * 检查用户名是否注册
+     * 是否已注册
      *
      * @param string $name
-     * @return think\response\Json
+     * @return think\response\Json|bool
      */
     public function isSign($name)
     {
-        $result = $this->validate([
+        $r = $this->validate([
             'name' => $name,
         ], 'app\validate\User.name');
-        if ($result === true) {
-            return UserModel::isSign($name);
-        } else {
-            return $result;
+        if (true !== $r) {
+            $this->error($r);
         }
+        return UserModel::isSign($name);
     }
     /**
      * 是否已登录
      *
-     * @return think\response\Json
+     * @return null|string
      */
     public function isLogin()
     {

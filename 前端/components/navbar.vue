@@ -9,7 +9,8 @@
         <nav-item href="/">首页</nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
-        <nav-item href="/login">登录/注册</nav-item>
+        <b-nav-item v-if="$store.state.用户" title="注销" @click="注销()">{{$store.state.用户}}</b-nav-item>
+        <nav-item v-else href="/login">登录/注册</nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -20,6 +21,11 @@ import navItem from "./nav-item";
 export default {
   components: {
     navItem
+  },
+  methods: {
+    注销() {
+      this.$store.dispatch("注销");
+    }
   }
 };
 </script>

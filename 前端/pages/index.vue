@@ -1,3 +1,3 @@
 <template>
-  <b-container></b-container>
+  <b-container>{{$store.state.用户}}</b-container>
 </template>
