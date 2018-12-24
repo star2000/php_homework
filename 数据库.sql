@@ -8,3 +8,7 @@ create table user(
     name varchar(20) unique not null,
     pwd char(40) not null
 );
+
+insert into user(name,pwd) values(
+    '李星',sha1(1753304)
+);
