@@ -6,7 +6,7 @@ export default {
   router: {
     middleware: 'check-login'
   },
-  
+
   head: {
     title: pkg.displayName,
     meta: [
@@ -23,7 +23,7 @@ export default {
   /*
   ** 自定义进度条颜色
   */
-  loading: { color: '#fff' },
+  loading: { color: '#6cf' },
 
   /*
   ** 全局样式表

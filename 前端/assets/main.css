@@ -4,3 +4,7 @@
 .page-enter, .page-leave-active {
   opacity: 0;
 }
+body{
+  background: url(/背景.jpg) no-repeat;
+  background-size: cover
+}
