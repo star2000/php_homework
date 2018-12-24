@@ -18,7 +18,8 @@
     "bootstrap-vue": "latest",
     "cross-env": "latest",
     "nuxt": "latest",
-    "vee-validate": "latest"
+    "vee-validate": "latest",
+    "lodash": "latest"
   },
   "devDependencies": {
     "nodemon": "latest"

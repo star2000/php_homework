@@ -1,5 +1,7 @@
 export default function ({ store, $axios }) {
-    $axios.post('user/isLogin').then(({ data }) => {
-        store.commit('设置用户', data)
-    })
+    if (!store.state.用户) {
+        $axios.post('user/isLogin').then(({ data }) => {
+            store.commit('设置用户', data)
+        })
+    }
 }

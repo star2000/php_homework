@@ -36,7 +36,8 @@ export default {
   ** 在安装App之前加载插件
   */
   plugins: [
-    '~/plugins/validate.js'
+    '~/plugins/validate.js',
+    '~/plugins/lodash.js'
   ],
 
   /*

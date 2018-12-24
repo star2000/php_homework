@@ -24,7 +24,9 @@ export default {
   },
   methods: {
     注销() {
-      this.$store.dispatch("注销");
+      this.$axios.post("user/logout").then(() => {
+        this.$store.commit("设置用户", null);
+      });
     }
   }
 };

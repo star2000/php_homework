@@ -17,8 +17,8 @@
         {
             "label": "热启动",
             "dependsOn": [
-                "前端",
-                "后端"
+                "后端",
+                "前端"
             ],
             "group": {
                 "kind": "build",

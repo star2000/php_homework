@@ -6,9 +6,8 @@
       title="不得超过二十个字"
       placeholder="名字"
       v-validate="'required|max:20'"
-      v-model="名字"
+      v-model="name"
       v-b-tooltip.focus
-      @change="验证()||是否注册()"
     />
     <span class="text-danger">{{errors.first('名字')}}</span>
     <br>
@@ -17,55 +16,81 @@
       name="密码"
       title="试试中文密码"
       placeholder="密码"
-      v-model="密码"
+      v-model="pwd"
       v-validate="'required|min:6'"
       v-b-tooltip.focus
     />
     <span class="text-danger">{{errors.first('密码')}}</span>
     <br>
-    <b-btn v-if="注册状态===true" @click="验证()||登录()" variant="primary" size="lg" block>登录</b-btn>
-    <b-btn v-else-if="注册状态===false" @click="验证()||注册()" variant="success" size="lg" block>注册</b-btn>
+    <b-btn v-if="注册状态===true" @click="登录()" variant="primary" size="lg" block>登录</b-btn>
+    <b-btn v-else-if="注册状态===false" @click="注册()" variant="success" size="lg" block>注册</b-btn>
     <b-btn v-else @click="$router.back()" size="lg" block>返回</b-btn>
   </b-card>
 </template>
 <script>
 export default {
   data: () => ({
-    名字: "",
-    密码: "",
+    name: "",
+    pwd: "",
     注册状态: undefined
   }),
-  methods: {
-    是否注册() {
-      this.$axios
-        .post("user/isSign", {
-          name: this.名字
-        })
-        .then(({ data }) => {
-          this.注册状态 = data;
-        });
-    },
-    注册() {
-      this.$store.dispatch("注册", {
-        名字: this.名字,
-        密码: this.密码
+  watch: {
+    name: _.debounce(function() {
+      this.$validator.validate("名字").then(结果 => {
+        if (结果) {
+          this.$axios
+            .post("user/isSign", {
+              name: this.name
+            })
+            .then(({ data }) => {
+              this.注册状态 = data;
+            });
+        } else {
+          this.注册状态 = undefined;
+        }
       });
-      this.$router.push("/");
+    }, 500)
+  },
+  methods: {
+    注册() {
+      this.$validator.validate().then(结果 => {
+        if (结果) {
+          this.$axios
+            .post("user/signUp", {
+              name: this.name,
+              pwd: this.pwd
+            })
+            .then(({ data }) => {
+              if (data.code) {
+                this.$router.push("/");
+              } else {
+                alert(data.msg);
+              }
+            });
+        } else {
+          alert(this.errors.first("*"));
+        }
+      });
     },
     登录() {
-      this.$store.dispatch("登录", {
-        名字: this.名字,
-        密码: this.密码
+      this.$validator.validate().then(结果 => {
+        if (结果) {
+          this.$axios
+            .post("user/signIn", {
+              name: this.name,
+              pwd: this.pwd
+            })
+            .then(({ data }) => {
+              if (data.code) {
+                this.$router.push("/");
+              } else {
+                alert(data.msg);
+              }
+            });
+        } else {
+          alert(this.errors.first("*"));
+        }
       });
-      this.$router.push("/");
-    },
-    验证() {
-      if (this.errors.any()) {
-        this.注册状态 = undefined;
-        return true;
-      } else {
-        return false;
-      }
     }
   }
 };
