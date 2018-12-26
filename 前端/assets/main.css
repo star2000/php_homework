@@ -1,10 +1,14 @@
 .page-enter-active, .page-leave-active {
-  transition: opacity .5s;
+  transition: opacity .5s
 }
 .page-enter, .page-leave-active {
-  opacity: 0;
+  opacity: 0
 }
-body{
+/* body{
   background: url(/背景.jpg) no-repeat;
   background-size: cover
+} */
+body{
+  background: #dfe3e4 url(/星.jpg) no-repeat right top;
+  background-size: 100vh
 }
